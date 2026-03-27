@@ -4,7 +4,7 @@ import {
   Address,
   nativeToScVal,
   Operation,
-  Rpc,
+  rpc,
   TransactionBuilder,
   xdr,
 } from "@stellar/stellar-sdk";
@@ -28,7 +28,7 @@ export async function buildUnsignedLoanRequestXdr({
   networkPassphrase = process.env.NEXT_PUBLIC_STELLAR_NETWORK_PASSPHRASE ??
     DEFAULT_NETWORK_PASSPHRASE,
 }: BuildLoanRequestXdrParams): Promise<string> {
-  const server = new Rpc.Server(rpcUrl);
+  const server = new rpc.Server(rpcUrl);
   const source = await server.getAccount(borrower);
   const amountScVal = nativeToScVal(BigInt(Math.floor(amount)), { type: "i128" });
   const borrowerScVal = new Address(borrower).toScVal();
